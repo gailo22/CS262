@@ -1,0 +1,236 @@
+Created by PLY version 3.3 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> args
+Rule 1     exp -> NUMBER
+Rule 2     exp -> CHAR
+Rule 3     args -> exp args
+Rule 4     args -> exp
+Rule 5     exp -> LPAREN args RPAREN
+Rule 6     exp -> args OR args
+Rule 7     exp -> args TIMES
+
+Terminals, with rules where they appear
+
+CHAR                 : 2
+LPAREN               : 5
+NUMBER               : 1
+OR                   : 6
+RPAREN               : 5
+TIMES                : 7
+error                : 
+
+Nonterminals, with rules where they appear
+
+args                 : 3 5 6 6 7 0
+exp                  : 3 4
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . args
+    (3) args -> . exp args
+    (4) args -> . exp
+    (1) exp -> . NUMBER
+    (2) exp -> . CHAR
+    (5) exp -> . LPAREN args RPAREN
+    (6) exp -> . args OR args
+    (7) exp -> . args TIMES
+
+    NUMBER          shift and go to state 3
+    CHAR            shift and go to state 4
+    LPAREN          shift and go to state 5
+
+    args                           shift and go to state 2
+    exp                            shift and go to state 1
+
+state 1
+
+    (3) args -> exp . args
+    (4) args -> exp .
+    (3) args -> . exp args
+    (4) args -> . exp
+    (1) exp -> . NUMBER
+    (2) exp -> . CHAR
+    (5) exp -> . LPAREN args RPAREN
+    (6) exp -> . args OR args
+    (7) exp -> . args TIMES
+
+  ! shift/reduce conflict for NUMBER resolved as shift
+  ! shift/reduce conflict for CHAR resolved as shift
+  ! shift/reduce conflict for LPAREN resolved as shift
+    RPAREN          reduce using rule 4 (args -> exp .)
+    OR              reduce using rule 4 (args -> exp .)
+    TIMES           reduce using rule 4 (args -> exp .)
+    $end            reduce using rule 4 (args -> exp .)
+    NUMBER          shift and go to state 3
+    CHAR            shift and go to state 4
+    LPAREN          shift and go to state 5
+
+  ! NUMBER          [ reduce using rule 4 (args -> exp .) ]
+  ! CHAR            [ reduce using rule 4 (args -> exp .) ]
+  ! LPAREN          [ reduce using rule 4 (args -> exp .) ]
+
+    args                           shift and go to state 6
+    exp                            shift and go to state 1
+
+state 2
+
+    (0) S' -> args .
+    (6) exp -> args . OR args
+    (7) exp -> args . TIMES
+
+    OR              shift and go to state 7
+    TIMES           shift and go to state 8
+
+
+state 3
+
+    (1) exp -> NUMBER .
+
+    NUMBER          reduce using rule 1 (exp -> NUMBER .)
+    CHAR            reduce using rule 1 (exp -> NUMBER .)
+    LPAREN          reduce using rule 1 (exp -> NUMBER .)
+    OR              reduce using rule 1 (exp -> NUMBER .)
+    TIMES           reduce using rule 1 (exp -> NUMBER .)
+    $end            reduce using rule 1 (exp -> NUMBER .)
+    RPAREN          reduce using rule 1 (exp -> NUMBER .)
+
+
+state 4
+
+    (2) exp -> CHAR .
+
+    NUMBER          reduce using rule 2 (exp -> CHAR .)
+    CHAR            reduce using rule 2 (exp -> CHAR .)
+    LPAREN          reduce using rule 2 (exp -> CHAR .)
+    OR              reduce using rule 2 (exp -> CHAR .)
+    TIMES           reduce using rule 2 (exp -> CHAR .)
+    $end            reduce using rule 2 (exp -> CHAR .)
+    RPAREN          reduce using rule 2 (exp -> CHAR .)
+
+
+state 5
+
+    (5) exp -> LPAREN . args RPAREN
+    (3) args -> . exp args
+    (4) args -> . exp
+    (1) exp -> . NUMBER
+    (2) exp -> . CHAR
+    (5) exp -> . LPAREN args RPAREN
+    (6) exp -> . args OR args
+    (7) exp -> . args TIMES
+
+    NUMBER          shift and go to state 3
+    CHAR            shift and go to state 4
+    LPAREN          shift and go to state 5
+
+    args                           shift and go to state 9
+    exp                            shift and go to state 1
+
+state 6
+
+    (3) args -> exp args .
+    (6) exp -> args . OR args
+    (7) exp -> args . TIMES
+
+  ! shift/reduce conflict for OR resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+    RPAREN          reduce using rule 3 (args -> exp args .)
+    $end            reduce using rule 3 (args -> exp args .)
+    NUMBER          reduce using rule 3 (args -> exp args .)
+    CHAR            reduce using rule 3 (args -> exp args .)
+    LPAREN          reduce using rule 3 (args -> exp args .)
+    OR              shift and go to state 7
+    TIMES           shift and go to state 8
+
+  ! OR              [ reduce using rule 3 (args -> exp args .) ]
+  ! TIMES           [ reduce using rule 3 (args -> exp args .) ]
+
+
+state 7
+
+    (6) exp -> args OR . args
+    (3) args -> . exp args
+    (4) args -> . exp
+    (1) exp -> . NUMBER
+    (2) exp -> . CHAR
+    (5) exp -> . LPAREN args RPAREN
+    (6) exp -> . args OR args
+    (7) exp -> . args TIMES
+
+    NUMBER          shift and go to state 3
+    CHAR            shift and go to state 4
+    LPAREN          shift and go to state 5
+
+    args                           shift and go to state 10
+    exp                            shift and go to state 1
+
+state 8
+
+    (7) exp -> args TIMES .
+
+    NUMBER          reduce using rule 7 (exp -> args TIMES .)
+    CHAR            reduce using rule 7 (exp -> args TIMES .)
+    LPAREN          reduce using rule 7 (exp -> args TIMES .)
+    OR              reduce using rule 7 (exp -> args TIMES .)
+    TIMES           reduce using rule 7 (exp -> args TIMES .)
+    $end            reduce using rule 7 (exp -> args TIMES .)
+    RPAREN          reduce using rule 7 (exp -> args TIMES .)
+
+
+state 9
+
+    (5) exp -> LPAREN args . RPAREN
+    (6) exp -> args . OR args
+    (7) exp -> args . TIMES
+
+    RPAREN          shift and go to state 11
+    OR              shift and go to state 7
+    TIMES           shift and go to state 8
+
+
+state 10
+
+    (6) exp -> args OR args .
+    (6) exp -> args . OR args
+    (7) exp -> args . TIMES
+
+  ! shift/reduce conflict for OR resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+    NUMBER          reduce using rule 6 (exp -> args OR args .)
+    CHAR            reduce using rule 6 (exp -> args OR args .)
+    LPAREN          reduce using rule 6 (exp -> args OR args .)
+    $end            reduce using rule 6 (exp -> args OR args .)
+    RPAREN          reduce using rule 6 (exp -> args OR args .)
+    OR              shift and go to state 7
+    TIMES           shift and go to state 8
+
+  ! OR              [ reduce using rule 6 (exp -> args OR args .) ]
+  ! TIMES           [ reduce using rule 6 (exp -> args OR args .) ]
+
+
+state 11
+
+    (5) exp -> LPAREN args RPAREN .
+
+    NUMBER          reduce using rule 5 (exp -> LPAREN args RPAREN .)
+    CHAR            reduce using rule 5 (exp -> LPAREN args RPAREN .)
+    LPAREN          reduce using rule 5 (exp -> LPAREN args RPAREN .)
+    OR              reduce using rule 5 (exp -> LPAREN args RPAREN .)
+    TIMES           reduce using rule 5 (exp -> LPAREN args RPAREN .)
+    $end            reduce using rule 5 (exp -> LPAREN args RPAREN .)
+    RPAREN          reduce using rule 5 (exp -> LPAREN args RPAREN .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for NUMBER in state 1 resolved as shift
+WARNING: shift/reduce conflict for CHAR in state 1 resolved as shift
+WARNING: shift/reduce conflict for LPAREN in state 1 resolved as shift
+WARNING: shift/reduce conflict for OR in state 6 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 6 resolved as shift
+WARNING: shift/reduce conflict for OR in state 10 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 10 resolved as shift
